@@ -11,19 +11,21 @@
   tasks:
   - name: create ec2 instance
     amazon.aws.ec2_instance:
-    security_group: "{{ sg_id }}"
-    image_id: "{{ ami_id }}"
-    name: "{{ item }}-{{ environment }}"
-    tags:
-    Project: roboshop
-    Component: "{{ item }}"
-    Environment: "{{ environment }}"
-    Name: "{{ item }}-{{ environment }}"
-  loop: "{{ instances }}"
-  register: ec2_output
+     security_group: "{{ sg_id }}"
+     image_id: "{{ ami_id }}"
+     name: "{{ item }}-{{ environment }}"
+     tags:
+      Project: roboshop
+      Component: "{{ item }}"
+      Environment: "{{ environment }}"
+      Name: "{{ item }}-{{ environment }}"
+    loop: "{{ instances }}"
+    register: ec2_output
 
-  -name: print the ec2_output
-  ansible.builtin.debug:
-   msg: "{{ ec2_output }}"
+  - name: print the ec2_output
+    ansible.builtin.debug:
+      msg: "{{ ec2_output }}"
+
+  
  
 
