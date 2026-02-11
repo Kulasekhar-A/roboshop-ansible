@@ -47,7 +47,7 @@
       dest: /app
       remote_src: yes
 
-  - name: download npm dependencie
+  - name: download npm dependencies
     community.general.npm:
       path: /app
 
