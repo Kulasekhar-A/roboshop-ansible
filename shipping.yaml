@@ -44,4 +44,4 @@
   - name: clean the maven package
     ansible.builtin.command: mvn clean package
     args:
-    chdir: /app 
+     chdir: /app 
