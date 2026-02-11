@@ -67,3 +67,15 @@
 
   - name: check load shipping schemas
     ansible.builtin.shell: mysql -h '{{ MYSQL_HOST }}' -uroot -pRoboShop@1 < /app/db/schema.sql
+
+  - name: create shipping app user
+    ansible.builtin.shell: mysql -h "{{ MYSQL_HOST }}" -uroot -pRoboShop@1 < /app/db/app-user.sql 
+
+  - name: loading shipping master data
+    ansible.builtin.shell: mysql -h "{{ MYSQL_HOST }}" -uroot -pRoboShop@1 < /app/db/master-data.sql
+
+  - name: start and enable shipping
+    ansible.builtin.service:
+      name: shipping
+      state: restarted
+      enabled: yes
