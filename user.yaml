@@ -33,7 +33,7 @@
 
   - name: delete user zip file
     ansible.builtin.file:
-      path: /tmp/user.zi
+      path: /tmp/user.zip
       state: absent
 
   - name: download user
