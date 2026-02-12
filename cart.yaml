@@ -18,7 +18,7 @@
       name: roboshop
       system: true
       home: /app
-      shell: /sbin/nologin
+      shell: /sbin/nologi
       comment: "roboshop system user"
 
   - name: delete directory
