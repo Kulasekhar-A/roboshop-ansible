@@ -4,8 +4,11 @@
   tasks:
   - name: install maven
     ansible.builtin.dnf:
-      name: maven
+      name: "{{ item }}"
       state: present
+    loop:
+    - maven
+    - mysql 
 
   - name: create systemuser for roboshop
     ansible.builtin.user:
@@ -60,19 +63,19 @@
     ansible.builtin.systemd_service:
       daemon_reload: true
 
-  - name: install mysql client
-    ansible.builtin.dnf:
-      name: mysql
-      state: present
+  - name: import shipping data
+    community.mysql.mysql_db:
+      state: import
+      name: all
+      login_host: "{{ MySQL_HOST }}"
+      login_user: root
+      login_password: RoboShop@1
+      target: "{{ item }}"
+    loop:
+    - /app/db/schema.sql
+    - /app/db/app-user.sql 
+    - /app/db/master-data.sql
 
-  - name: check load shipping schemas
-    ansible.builtin.shell: mysql -h '{{ MYSQL_HOST }}' -uroot -pRoboShop@1 < /app/db/schema.sql
-
-  - name: create shipping app user
-    ansible.builtin.shell: mysql -h "{{ MYSQL_HOST }}" -uroot -pRoboShop@1 < /app/db/app-user.sql 
-
-  - name: loading shipping master data
-    ansible.builtin.shell: mysql -h "{{ MYSQL_HOST }}" -uroot -pRoboShop@1 < /app/db/master-data.sql
 
   - name: start and enable shipping
     ansible.builtin.service:
