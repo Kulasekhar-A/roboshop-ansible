@@ -62,7 +62,7 @@
 
   - name: install mysql client
     ansible.builtin.dnf:
-      name: mysq
+      name: mysql
       state: present
 
   - name: check load shipping schemas
