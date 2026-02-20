@@ -18,7 +18,7 @@
      instance_type: "t3.micro"
      security_group: "{{ sg_id }}"
      image_id: "{{ ami_id }}"
-     name: "{{ item }}-{{ env }}
+     name: "{{ item }}-{{ env }}"
      wait: true
      tags:
       Project: roboshop
