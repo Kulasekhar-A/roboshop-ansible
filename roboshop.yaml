@@ -7,9 +7,7 @@
    domain_name: annuru.online
    env: dev
    action: create
-   instances:
-   - mongodb
-   - catalogue
+   instances: "{{ item }}"
 
   tasks:
     #CREATE###
